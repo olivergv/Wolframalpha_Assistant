@@ -10,10 +10,8 @@ import smtplib
 from gtts import gTTS
 import playsound
 import pyaudio
-import wikipedia
 import wolframalpha
 import time
-import datetime
 
 
 
@@ -23,4 +21,40 @@ def speak(text):
 	filename = "voice.mp3"
 	tts.save(filename)
 	playsound.playsound(filename)
-   
+	
+
+def takeCommand():
+
+    r = sr.Recognizer()
+
+    with sr.Microphone() as source:
+
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language ='en-in')
+        print("you said"+ query)
+
+    except Exception as e:
+        print(e)
+        print("Unable to Recognizing your voice.")
+        return "None"
+
+    return query
+
+
+
+while True:
+	
+	query = takeCommand()
+	
+	 client = 'WJU3L2-QAGA3PJGEU'
+         question = query
+         client = wolframalpha.Client('WJU3L2-QAGA3PJGEU')
+         res = client.query(question)
+         answer = next(res.results).text
+         speak(answer)
+	 print(answer)
