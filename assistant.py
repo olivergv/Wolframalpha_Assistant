@@ -50,11 +50,10 @@ def takeCommand():
 while True:
 	
 	query = takeCommand()
-	
-	 client = 'WJU3L2-QAGA3PJGEU'
-         question = query
-         client = wolframalpha.Client('WJU3L2-QAGA3PJGEU')
-         res = client.query(question)
-         answer = next(res.results).text
-         speak(answer)
-	 print(answer)
+	client = 'WJU3L2-QAGA3PJGEU'
+	question = query
+        client = wolframalpha.Client('WJU3L2-QAGA3PJGEU')
+        res = client.query(question)
+        answer = next(res.results).text
+        speak(answer)
+	print(answer)
